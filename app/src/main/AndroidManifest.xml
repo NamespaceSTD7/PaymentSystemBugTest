@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="ru.evotor.permission.PAYMENT_SYSTEM" />
+    <uses-permission android:name="ru.evotor.permission.COMBINED"/>
+    <uses-permission android:name="ru.evotor.permission.SELL_INTEGRATION_SERVICE" />
+    <uses-permission android:name="ru.evotor.permission.PAYBACK_INTEGRATION_SERVICE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SellApiScreenTest"
+        tools:targetApi="31">
+
+        <meta-data
+            android:name="app_uuid"
+            android:value="5e77bc85-321d-4fa4-975c-059d2c47085c" />
+
+        <service
+            android:name=".CombinedPaymentService"
+            android:enabled="true"
+            android:exported="true"
+            android:label="Комбооплата">
+            <meta-data
+                android:name="ru.evotor.sales_screen.BACKGROUND_COLOR"
+                android:value="#cdd40a" />
+
+            <meta-data
+                android:name="ru.evotor.paymentSystem.PAYMENT_SYSTEM_ID"
+                android:value="ru.softc.evotor.prepayment.combined" />
+
+            <intent-filter>
+                <action android:name="evo.v2.receipt.sell.payment.COMBINED" />
+                <action android:name="evo.v2.receipt.payback.payment.COMBINED" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".ComboPaymentActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SellApiScreenTest">
+            <meta-data
+                android:name="ru.evotor.launcher.BACKGROUND_COLOR"
+                android:value="#cdd40a" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.EVOTOR" />
+            </intent-filter>
+        </activity>
+
+<!--        <service-->
+<!--            android:name=".TestService"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true"-->
+<!--            android:label="@string/app_name">-->
+<!--            <meta-data-->
+<!--                android:name="ru.evotor.sales_screen.BACKGROUND_COLOR"-->
+<!--                android:value="#cdd40a" />-->
+
+<!--            <intent-filter>-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+
+<!--                <action android:name="evo.v2.receipt.sell.receiptDiscount" />-->
+<!--            </intent-filter>-->
+<!--        </service>-->
+
+    </application>
+
+</manifest>
